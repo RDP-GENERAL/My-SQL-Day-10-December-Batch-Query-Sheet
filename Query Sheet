@@ -1,0 +1,57 @@
+use mysql_tutorial_dec;
+CREATE TABLE salary_details (
+    emp_id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_name VARCHAR(100) NOT NULL,
+    emp_address VARCHAR(255),
+    company_name VARCHAR(100) NOT NULL,
+    salary DECIMAL(10,2) NOT NULL
+) AUTO_INCREMENT = 100;
+
+select * from salary_details;
+
+INSERT INTO salary_details (emp_name, emp_address, company_name, salary)
+VALUES
+('Amit Sharma', 'Kolkata, India', 'ABC Technologies', 75000.00),
+('Priya Das', 'Mumbai, India', 'XYZ Solutions', 85000.00),
+('Rajesh Kumar', 'Bangalore, India', 'Global Tech', 90000.00),
+('Sneha Gupta', 'Pune, India', 'NextGen Softwares', 72000.50),
+('Vikram Sen', 'Delhi, India', 'ABC Technologies', 88000.75),
+('Ananya Roy', 'Hyderabad, India', 'XYZ Solutions', 94000.00),
+('Sourav Sinha', 'Chennai, India', 'Innovatech', 102000.25),
+('Megha Bhattacharya', 'Kolkata, India', 'Pioneer Systems', 120000.00),
+('Arjun Mehta', 'Bangalore, India', 'NextGen Softwares', 150000.50),
+('Neha Patil', 'Pune, India', 'Innovatech', 135000.75),
+('Suman Ghosh', 'Mumbai, India', 'ABC Technologies', 78000.00),
+('Kiran Reddy', 'Hyderabad, India', 'Global Tech', 110000.00),
+('Ravi Shankar', 'Delhi, India', 'XYZ Solutions', 89000.00),
+('Tanya Bose', 'Kolkata, India', 'Pioneer Systems', 95000.25),
+('Abhishek Singh', 'Noida, India', 'Global Tech', 130000.50),
+('Pooja Agarwal', 'Bangalore, India', 'NextGen Softwares', 125000.75),
+('Manoj Pandey', 'Chennai, India', 'Innovatech', 99000.00),
+('Ritika Verma', 'Gurgaon, India', 'ABC Technologies', 85000.00),
+('Sandeep Malhotra', 'Mumbai, India', 'Pioneer Systems', 92000.25),
+('Sweta Chakraborty', 'Pune, India', 'XYZ Solutions', 108000.00);
+
+
+select * from salary_details;
+
+select company_name, avg(salary) as avg_salary
+from salary_details
+group by company_name
+having avg_salary>=100000
+order by avg_salary desc;
+
+select * from salary_details
+where salary>=
+(select avg(salary) as avg_salary from salary_details);
+
+select company_name,count(emp_id) as emp_count,
+avg(salary) as avg_salary,
+max(salary) as max_salary,
+min(salary) as min_salary,
+sum(salary) as total_expence_by_company
+from salary_details
+group by company_name
+order by avg_salary desc;
+
+select count(emp_id) from salary_details;
